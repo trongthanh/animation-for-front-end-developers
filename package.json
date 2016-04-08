@@ -1,0 +1,22 @@
+{
+  "name": "programming-animation",
+  "version": "0.0.0",
+  "description": "",
+  "config": {
+    "src": ".",
+    "dist": "dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "browser-sync": "^2.8.2",
+    "del": "^2.2.0",
+    "eslint": "^2.7.0",
+    "gulp": "^3.9.0",
+    "gulp-if": "^2.0.0",
+    "gulp-postcss": "^6.1.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "sass-lint": "^1.5.1"
+  }
+}
