@@ -41,10 +41,11 @@
 	},
 	"globals": {
 		"TweenMax": true,
-		"TimelineMax": true
+		"TimelineMax": true,
+		"$": true,
+		"$$": true
 	},
 	"env": {
-		"jquery": true,
 		"browser": true
 	},
 	"plugins": []
