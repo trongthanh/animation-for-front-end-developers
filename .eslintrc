@@ -40,7 +40,9 @@
 
 	},
 	"globals": {
+		"TweenLite": true,
 		"TweenMax": true,
+		"TimelineLite": true,
 		"TimelineMax": true,
 		"$": true,
 		"$$": true
