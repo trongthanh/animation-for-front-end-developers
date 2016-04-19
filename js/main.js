@@ -10,7 +10,7 @@
 
 	var slideCount = 0;
 	var currentSlide = 1; // 1-based
-	var Story = new TimelineLite({
+	var Story = new TimelineMax({
 		paused: true
 	});
 
@@ -18,24 +18,20 @@
 	.then(function() {
 		'use strict';
 
-		TweenMax.from($('h1'), 0.5, {
-			top: '-400px',
-			opacity: 0
-
-		});
-
 		// Create a timeline for each Slide
 		$$('.slide').forEach(function(el) {
-			var slideTl = new TimelineLite();
 			slideCount++;
+			var label = labelOf(slideCount);
+			console.log('slide', label, 'created');
 
-			slideTl
-				.from(el, 0.5, {opacity: 0, x: '-20%', onComplete: pause})
-				.to(el, 0.5, {opacity: 0, x: '-80%', onReverseComplete: pause});
+			Story
+				.addLabel(label)
+				.staggerFrom(el.children, 0.5, {opacity: 0, x: '500px'}, 0.1)
+				.addLabel('mid' + label)
+				.staggerTo(el.children, 0.5, {opacity: 0, x: '-500px'}, 0.1);
 
-			// store the timeline to slide for later retrieval
-			el._.slideTl = slideTl;
-			Story.add(slideTl, labelOf(slideCount));
+			// store the timeline label for later retrieval
+			el._.tlLabel = label;
 
 		});
 
@@ -43,17 +39,14 @@
 		$('.js-next').addEventListener('click', function(event) {
 			event.preventDefault();
 			if (!Story.isActive()) {
-				// auto play until next pause action
-				Story.play();
-				currentSlide++;
+				playNext();
 			}
 		});
 
 		$('.js-back').addEventListener('click', function(event) {
 			event.preventDefault();
 			if (!Story.isActive()) {
-				Story.reverse();
-				currentSlide--;
+				playBack();
 			}
 		});
 
@@ -75,18 +68,51 @@
 		var hash = location.hash;
 		var slideNum = hash.substr(1);
 
-		if (isNaN(slideNum)) {
+		if (!slideNum || isNaN(slideNum)) {
 			slideNum = 1;
 		} else {
 			slideNum = parseInt(slideNum);
 		}
 
 		currentSlide = slideNum;
-		Story.play(labelOf(currentSlide));
+		play();
 
 		// show body now:
 		document.body.style.visibility = 'visible';
 	});
+
+	function play() {
+		Story.tweenTo(labelOf(currentSlide, 'mid'));
+	}
+
+	function playNext() {
+		currentSlide++;
+
+		if (currentSlide > slideCount) {
+			// keep current slide not overflow the slideCount
+			currentSlide = slideCount;
+		}
+
+		var label = labelOf(currentSlide, 'mid');
+		console.log('playto:', label, currentSlide);
+		Story.tweenTo(label);
+	}
+
+	function playBack() {
+		currentSlide--;
+		var label;
+
+		if (currentSlide < 1) {
+			// reverse to the start of first slide
+			label = labelOf(1);
+			// keep current slide not lower than 0
+			currentSlide = 0;
+		} else {
+			label = labelOf(currentSlide, 'mid');
+		}
+		console.log('playto:', label, currentSlide);
+		Story.tweenTo(label);
+	}
 
 	/**
 	 * Function use as timeline action to pause in the middle
@@ -94,10 +120,10 @@
 	 *
 	 * @return {void}
 	 */
-	function pause() {
-		Story.pause();
-		console.log('Story paused at', currentSlide);
-	}
+	// function pause() {
+	// 	Story.pause();
+	// 	console.log('Story paused at', currentSlide);
+	// }
 
 
 	/**
