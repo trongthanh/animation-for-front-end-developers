@@ -80,20 +80,25 @@
 
 		$('body')._.events({
 			'keydown': function(event) {
+
+				if (Story.isActive()) {
+					return;
+				}
 				switch (event.which || event.keyCode) {
 					case 37: // left
 					case 38: // up
+						event.preventDefault();
 						playBack();
 						break;
 
 					case 39: // right
 					case 40: // down
+						event.preventDefault();
 						playNext();
 						break;
 
 					default: return; // exit this handler for other keys
 				}
-				event.preventDefault();
 			}
 		});
 
