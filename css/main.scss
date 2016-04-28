@@ -99,6 +99,9 @@ textarea {
    ========================================================================== */
 body {
 	height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	font-size: 170%;
 }
 
 .main-content {
@@ -113,7 +116,14 @@ body {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	z-index: 0;
 }
+
+.slide ul {
+	display: inline-block;
+	text-align: left;
+}
+
 
 
 

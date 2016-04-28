@@ -27,8 +27,10 @@
 			Story
 				.addLabel(label)
 				.staggerFrom(el.children, 0.5, {opacity: 0, x: '500px'}, 0.1)
+				.to(el, 0, {zIndex: 1})
 				.addLabel('mid' + label)
-				.staggerTo(el.children, 0.5, {opacity: 0, x: '-500px'}, 0.1);
+				.staggerTo(el.children, 0.5, {zIndex: -1, opacity: 0, x: '-500px'}, 0.1)
+				.to(el, 0, {zIndex: 0});
 
 			// store the timeline label for later retrieval
 			el._.tlLabel = label;
