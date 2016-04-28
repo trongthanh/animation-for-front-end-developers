@@ -8,18 +8,26 @@
 	var NAU_ASCII_ART = '   _.._             _.._           .--┐\n .`--.  \'.        .\'  .-`\'.       |   |\n.   .-\\   \\  (`) .   /-.   \\      |   |\n|   |  \\   \\     |   |  \\   \\     |   |\n|   |   \\   \\    |   |   \\   \\    |   |\n|   |    \\   \\   |   |    \\   \\   |   |\n|   |     \\   \\  |   |     \\   \\  |   |\n|   |      \\   `-/   |      \\   \\-\'   |\n|   |       \\_.-`   ,\'  (`)  \\   `-._.\'\n└--`         `-...-`          `-...-`\nNau Studio';
 	console.log(NAU_ASCII_ART);
 
+	var progressBar;
 	var slideCount = 0;
 	var currentSlide = 1; // 1-based
 	var Story = new TimelineMax({
-		paused: true
+		paused: true,
+		onUpdate: function() {
+			if (progressBar) {
+				progressBar.style.width = (Story.progress() * 100) + '%';
+			}
+		}
 	});
 
 	$.ready()
 	.then(function() {
 		'use strict';
 
+		progressBar = $('.js-progress-bar');
+
 		// Create a timeline for each Slide
-		$$('.slide').forEach(function(el) {
+		$$('.slide').forEach(function(el, index, all) {
 			slideCount++;
 			var label = labelOf(slideCount);
 			console.log('slide', label, 'created');
@@ -28,9 +36,13 @@
 				.addLabel(label)
 				.staggerFrom(el.children, 0.5, {opacity: 0, x: '500px'}, 0.1)
 				.to(el, 0, {zIndex: 1})
-				.addLabel('mid' + label)
-				.staggerTo(el.children, 0.5, {zIndex: -1, opacity: 0, x: '-500px'}, 0.1)
-				.to(el, 0, {zIndex: 0});
+				.addLabel('mid' + label);
+
+			if (slideCount < all.length) {
+				// last slide stop at its mid state, others will have fade state
+				Story.staggerTo(el.children, 0.5, {zIndex: -1, opacity: 0, x: '-500px'}, 0.1)
+					.to(el, 0, {zIndex: 0});
+			}
 
 			// store the timeline label for later retrieval
 			el._.tlLabel = label;

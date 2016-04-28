@@ -104,10 +104,6 @@ body {
 	font-size: 170%;
 }
 
-.main-content {
-
-}
-
 
 .slide {
 	width: 1024px;
@@ -122,6 +118,24 @@ body {
 .slide ul {
 	display: inline-block;
 	text-align: left;
+}
+
+.control {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 0;
+
+	&__progress-bar {
+		position: absolute;
+		height: 15px;
+		left: 0;
+		bottom: 0;
+		background-color: #CCC;
+		width: 0%;
+	}
 }
 
 
