@@ -26,22 +26,22 @@
 			</div><!-- /.stage -->
 
 			<section class="slide">
-				<h1>Programming Animation<br><small></small></h1>
+				<h1>Introduction to UI Animation<br><small></small></h1>
 				<h2>Presented by Thanh Tran</h2>
 
 			</section><!-- /.slide -->
 
 			<section class="slide">
 				<h2>Definition</h2>
-				<p>Animation* is the process of making the illusion of motion and change[Note 1] by means of the rapid display of a sequence of static images that minimally differ from each other. The illusion—as in motion pictures in general—is thought to rely on the phi phenomenon.</p>
+				<p>Animation* is the process of making the illusion of motion and change by means of the rapid display of a sequence of static images that minimally differ from each other. The illusion—as in motion pictures in general—is thought to rely on the phi phenomenon.</p>
 				<p ><small>(from <a href="https://en.wikipedia.org/wiki/Animation" target="_blank">Wikipedia)</a></small></p>
 				<aside>
-					<dd>*From Latin animātiō, "the act of bringing to life"; from animō ("to animate" or "give life to") and -ātiō ("the act of").</dd>
+					<dd>*From Latin: animātiō, "the act of bringing to life"; from animō ("to animate" or "give life to") and -ātiō ("the act of").</dd>
 				</aside>
 			</section><!-- /.slide -->
 
 			<section class="slide">
-				<h2>Example:</h2>
+				<h2>Example</h2>
 				<p><img src="img/horse-ani.gif" alt="Horse animation"></p>
 			</section><!-- /.slide -->
 
@@ -52,17 +52,22 @@
 			<section class="slide">
 				<h2>Frame</h2>
 				<p>A frame is one of the many still images which compose the complete moving picture / animation</p>
-				<p>[Show the frames in a film strip]</p>
-				<p>[Then turn it into animation by playing the film strip quickly]</p>
-				<p><a href="https://en.wikipedia.org/wiki/Film_frame"><small>Wiki reference</small></a></p>
+				<div class="filmstrip">
+					<div class="filmstrip__sprite"></div>
+				</div>
+				<p><a target="_blank" href="https://en.wikipedia.org/wiki/Film_frame"><small>Wiki reference</small></a></p>
+			</section><!-- /.slide -->
+
+			<section class="slide">
+				<p><img src="img/man-on-horse.gif" alt=""></p>
+				<p><a target="_blank" href="http://patsobo.com/game-tutorial-sprite-class-part-1/"><small>Source</small></a></p>
 			</section><!-- /.slide -->
 
 			<section class="slide">
 				<h2>Frame Rate</h2>
-				<p>Frame rate, also known as frame frequency, is the frequency (rate) at which an imaging device displays consecutive images called frames. [...] Frame rate is expressed in frames per second (FPS).</p>
-				<p>[Continue playing the animation from last slide; then adjust the frame rate for demonstration]</p>
-				<p>[Take note about framerate at capture and at playback]</p>
-				<p><a href="https://en.wikipedia.org/wiki/Frame_rate"><small>Wiki reference</small></a></p>
+				<p>Frame rate, also known as frame frequency, is the frequency (rate) at which an imaging device displays consecutive images called frames. [...] Frame rate is expressed in frames per second (FPS).
+				&mdash; <a target="_blank" href="https://en.wikipedia.org/wiki/Frame_rate">Wikipedia</a></p>
+				<p><a href="https://frames-per-second.appspot.com/" target="_blank">Demo FPS</a></p>
 			</section><!-- /.slide -->
 
 			<section class="slide">
@@ -77,38 +82,91 @@
 
 			<section class="slide">
 				<h2>Tween-based Animations</h2>
-				<p>Borrow from Flash's term: tween - "between-frame" animation</p>
-				<p>[Show image of Flash's tween keyframes on timeline]</p>
+				<p>Borrow from Flash's term: tween - inbetweening animation</p>
+				<p><img src="img/flash-tween.gif" alt="Authoring Flash motion tween"></p>
 				<p>Computer-generated animation by changing styles and display properties gradually over a period of time</p>
 				<p>There are at least 2 keyframes marks the start and end states of the animation</p>
+
+				<!-- Read more:
+				https://en.wikipedia.org/wiki/Inbetweening
+				http://www.republicofcode.com/tutorials/flash/motion_tweening/
+				-->
 			</section><!-- /.slide -->
 
 			<section class="slide">
-				<h2>Tween-based Animations</h2>
-				<p>Example:</p>
-				<p>[Show a tween animation for x, y position, with a timer running]</p>
+				<h2>Demo</h2>
+				<p>Authoring simple tween animation with Google Web Designer</p>
 			</section><!-- /.slide -->
 
 			<section class="slide">
 				<h2>CSS Animations</h2>
 				<p>Example:</p>
-				<p>[Show a simple syntax example and resulted demo]</p>
-				<p>Take note on these animation's parameters</p>
-				<ul>
-					<li>delay</li>
-					<li>duration</li>
-					<li>iteration-count</li>
-					<li>name</li>
-					<li>timing-function</li>
-				</ul>
+<pre><code class="language-css">p {
+	animation-delay: 0s;
+	animation-direction: alternate;
+	animation-duration: 3s;
+	animation-iteration-count: 3;
+	animation-name: slidein;
+	animation-timing-function: ease;
+}
+
+@keyframes slidein {
+	from {
+		margin-left: 100%;
+		width: 300%;
+	}
+	to {
+		margin-left: 0%;
+		width: 100%;
+	}
+}</code></pre>
 			</section><!-- /.slide -->
 
 			<section class="slide">
 				<h2>CSS Transitions</h2>
 				<p>Example:</p>
-				<p>[Show a simple syntax example and resulted demo]</p>
+<pre><code class="language-css">.target {
+	transition-delay: 0s;
+	transition-duration: 3s;
+	transition-property: all;
+	transition-timing-function: ease;
+}</code></pre>
 			</section><!-- /.slide -->
 
+			<section class="slide">
+				<h2>Animatable properties</h2>
+				<p>Most common: <strong>all</strong>, left, right, top, bottom, width, height, opacity, transform, color, border, ...</p>
+				<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties" target="_blank">Full list of animatable properties</a></p>
+			</section><!-- /.slide -->
+
+			<section class="slide">
+				<h2>Easing / Timing function</h2>
+				<p><a target="_blank" href="http://matthewlein.com/ceaser/">http://matthewlein.com/ceaser/</a></p>
+				<p>Limitation: elastic, spring</p>
+				<p><a target="_blank" href="http://easings.net/">http://easings.net/</a></p>
+			</section><!-- /.slide -->
+
+			<section class="slide">
+				<h1>Physics-based animations</h1>
+			</section><!-- /.slide -->
+
+			<section class="slide">
+				<h2>Physics-based animations</h2>
+				<p>Life-like movement, no fixed timing or duration.</p>
+				<p>Example: <a target="_blank" href="http://wellcaffeinated.net/PhysicsJS/#demo-6
+">Facebook Rebound</a></p>
+				<p>Example: <a target="_blank" href="http://facebook.github.io/rebound-js/examples/">A real physics engine</a></p>
+			</section><!-- /.slide -->
+
+			<section class="slide">
+				<h2>Animation Breakdown Exercise</h2>
+				<p><a href="http://tympanus.net/Development/HoverEffectIdeas/index.html" target="_blank">Subtle Hover Effect</a></p>
+			</section><!-- /.slide -->
+
+			<section class="slide">
+				<h2>The End</h2>
+				<p>Q&A</p>
+			</section><!-- /.slide -->
 
 		</main>
 
@@ -119,6 +177,11 @@
 
 
 		</footer>
+
+		<!--
+		Credits:
+		- man on horse sprite sheet: http://patsobo.com/game-tutorial-sprite-class-part-1/
+		 -->
 
 
 		<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script>

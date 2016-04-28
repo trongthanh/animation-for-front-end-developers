@@ -104,6 +104,11 @@ body {
 	font-size: 170%;
 }
 
+code[class*="language-"], pre[class*="language-"] {
+	font-size: 16px;
+	line-height: 1.5;
+}
+
 
 .slide {
 	width: 1024px;
@@ -138,6 +143,41 @@ body {
 	}
 }
 
+.filmstrip {
+	$frame: 170px;
+	position: relative;
+	left: -0.5*$frame;
+	width: 7*$frame; // 7 frame visible
+	overflow: hidden;
+
+	&::before {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 3*$frame;
+		background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		left: 0;
+		top: 0;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 3*$frame;
+		background: linear-gradient(to left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		right: 0;
+		top: 0;
+	}
+
+	&__sprite {
+		height: $frame;
+		width: 14*$frame;
+		background-image: url(../img/man-on-horse-spritesheet.png);
+		background-size: auto $frame;
+		background-repeat: repeat-x;
+	}
+}
 
 
 
