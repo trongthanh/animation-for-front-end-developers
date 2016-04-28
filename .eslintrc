@@ -10,7 +10,7 @@
 		"curly"                       :[2, "all" ],
 		"dot-notation"                :[2, { "allowKeywords": true } ],
 		"eqeqeq"                      :[2, "allow-null" ],
-		"indent"                      :[2, "tab" ],
+		"indent"                      :[2, "tab", {"SwitchCase": 1} ],
 		"linebreak-style"             :[2, "unix" ],
 		// must: new ClassFunction(); but allow: Component() (JSX component)
 		"new-cap"                     :[2, { "capIsNew": false } ],

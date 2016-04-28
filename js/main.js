@@ -64,6 +64,25 @@
 			}
 		});
 
+		$('body')._.events({
+			'keydown': function(event) {
+				switch (event.which || event.keyCode) {
+					case 37: // left
+					case 38: // up
+						playBack();
+						break;
+
+					case 39: // right
+					case 40: // down
+						playNext();
+						break;
+
+					default: return; // exit this handler for other keys
+				}
+				event.preventDefault();
+			}
+		});
+
 		// check hash
 		var hash = location.hash;
 		var slideNum = hash.substr(1);
@@ -75,14 +94,19 @@
 		}
 
 		currentSlide = slideNum;
-		play();
+		play(currentSlide);
 
 		// show body now:
 		document.body.style.visibility = 'visible';
 	});
 
-	function play() {
-		Story.tweenTo(labelOf(currentSlide, 'mid'));
+	function play(slide) {
+		var fromPos = (slide > 1) ? 'slide' + slide : 0;
+		var toPos = labelOf(slide, 'mid');
+
+		console.log('Play from', fromPos, 'to', toPos);
+		window.location.hash = slide;
+		Story.tweenFromTo( fromPos, toPos );
 	}
 
 	function playNext() {
@@ -95,6 +119,7 @@
 
 		var label = labelOf(currentSlide, 'mid');
 		console.log('playto:', label, currentSlide);
+		window.location.hash = currentSlide;
 		Story.tweenTo(label);
 	}
 
@@ -111,6 +136,7 @@
 			label = labelOf(currentSlide, 'mid');
 		}
 		console.log('playto:', label, currentSlide);
+		window.location.hash = currentSlide;
 		Story.tweenTo(label);
 	}
 
