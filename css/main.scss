@@ -133,6 +133,10 @@ code[class*="language-"], pre[class*="language-"] {
 	width: 100%;
 	z-index: 0;
 
+	&__nav {
+		text-decoration: none;
+	}
+
 	&__progress-bar {
 		position: absolute;
 		height: 15px;

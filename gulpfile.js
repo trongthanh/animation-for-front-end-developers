@@ -20,7 +20,7 @@ var g = {
 /**
  * Configs
  */
-var mode = 'dev';
+var mode = 'prod';
 var paths = {
 	src: '.',
 	dist: 'dist',
@@ -65,7 +65,7 @@ gulp.task('styles', function() {
 		]))
 		.pipe( g.if(mode === 'dev', g.sourcemaps.write()) )
 		.pipe(gulp.dest(paths.srcStyles))
-		.pipe( g.if(mode !== 'dev', gulp.dest(paths.distStyles)) )
+		// .pipe( g.if(mode !== 'dev', gulp.dest(paths.distStyles)) )
 		.pipe(browserSync.stream());
 });
 
